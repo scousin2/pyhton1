@@ -1,0 +1,36 @@
+def main():
+    userInput = input("Enter a sentence: ")
+
+    # Split the sentence
+    sentence = userInput.split()
+
+    # Loop through the list of words  
+    for i in range(len(sentence)):
+        word = sentence[i]
+        # If the word is a number, call the function to convert it.
+        if word.isdigit():
+            number = int(word)
+            if number < 100:
+                sentence[i] = convertTensDigits(number)
+
+    # go through the words. 
+    for i in range(len(sentence)):
+        print(sentence[i] + " ", end='')
+
+def convertSingleNumbers(number):
+    singleNumbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    # Returns the text number at the index of the number
+    return singleNumbers[number]
+
+def convertTensDigits(number):
+    tensDigits = [ "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+    if number < 10:
+        return convertSingleNumbers(number)
+    elif number < 20:
+        return ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"][number - 10]
+    else:
+        index = number // 10-2
+        return tensDigits[index] + ("-" + convertSingleNumbers(number % 10) if number % 10 != 0 else "")
+
+# Call function
+main()
